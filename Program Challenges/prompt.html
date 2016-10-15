@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hangman</title>
+</head>
+<body>
+	<h1>Hangman</h1>
+	<script>
+	// array of words
+	var words = [
+	"trajectory", "symphony", "desire", "antfarm", "dancer", "happiness", "positioning",
+	"hobbit", "obituary", "cheetah", "sunrise", "antithesis", "wrong", "diamonds",
+	"partnership", "oblique", "sanctuary"];
+
+	// pick a random word
+
+	var word = words[Math.floor(Math.random() * words.length)];
+
+	// set up the answer array
+	var answerArray = [];
+
+	for (var i = 0; i < word.length; i++) {
+  	answerArray[i] = "_";
+	}
+
+	var remainingLetters = word.length;
+
+	//amount of guesses
+
+	var guessNumber = 10;
+
+	//the game loop
+
+	while (remainingLetters > 0 && guessNumber > 0) {
+  	//show the player their progress
+    alert("Your word is " + answerArray.join(" ") + "and you have " +guessNumber+ " guesses left");
+    //get a guess from player
+    var guess = prompt("Guess a letter, or click cancel to stop playing.");
+    if (guess === null) {
+      //exit the loop
+      alert("Ok you can quit");
+      break;
+    } else if (guess.length !== 1) {
+      	alert("Please enter a single letter.");
+		} else {
+				guessNumber--;
+				  guess = guess.toLowerCase();
+        //update the game state with the guess
+        for (var j = 0; j < word.length; j++) {
+            if (word[j] === guess && answerArray[j] === "_") {
+                answerArray[j] = guess;
+                remainingLetters--;
+            }
+        }
+			}
+} //end game loop
+
+//alert to congratulate player
+	alert(answerArray.join(" "));
+    if (guessNumber > 0) {
+      alert("Good job! The answer was " + word);
+    } else {
+      alert("Too bad! The answer was " + word);
+    }
+	</script>
+	</body>
+</html>

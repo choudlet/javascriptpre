@@ -6,61 +6,60 @@
 <body>
 	<h1>Hangman</h1>
 	<script>
-	// array of words
-	var words = [
-	"trajectory", "symphony", "desire", "antfarm", "dancer", "happiness", "positioning",
-	"hobbit", "obituary", "cheetah", "sunrise", "antithesis", "wrong", "diamonds",
-	"partnership", "oblique", "sanctuary"];
-	
-	// pick a random word
-	
-	var word = words[Math.floor(Math.random() * words.length)];
-	
-	// set up the answer array
-	var answerArray = [];
-	
-	for (var i = 0; i < word.length; i++) {
-		answerArray[i] = "_";
-	}
-	
-	var remainingLetters = word.length;
-	
-	var guessNumber = 5;
-	
-	// setting up break
-	quit = false;
-	//the game loop
-	
-	while (remainingLetters > 0 && guessNumber > 0) {
-		//show the player their progress
-		alert("Your word is " + answerArray.join(" ") + "and you have " + guessNumber + " guesses left");
-	
-		//get a guess from player
-		var guess = prompt("Guess a letter, or click cancel to stop playing.");
-		if (guess === null) {
-			//exit the loop
-			alert("Ok you can quit");
-			quit = true;
-			break;
-		} else guess = guess.toLowerCase();
-			if (guess.length !== 1) {
-			alert("Please enter a single letter.");
-		} else
-			//update the game state with the guess
-			for (var j = 0; j < word.length; j++) {
-				if (word[j] === guess) {
-					answerArray[j] = guess;
-					remainingLetters--;
-				} 
-			}
-		}
-		//end game loop
-		
-	//alert to congratulate player
-if (quit = false) {
+// array of words
+var words = [
+"trajectory", "symphony", "desire", "antfarm", "dancer", "happiness", "positioning",
+"hobbit", "obituary", "cheetah", "sunrise", "antithesis", "wrong", "diamonds",
+"partnership", "oblique", "sanctuary"];
+
+// pick a random word
+
+var word = words[Math.floor(Math.random() * words.length)];
+
+// set up the answer array
+var answerArray = [];
+
+for (var i = 0; i < word.length; i++) {
+    answerArray[i] = "_";
+}
+
+var remainingLetters = word.length;
+
+//amount of guesses
+
+var guessNumber = 10;
+
+//the game loop
+
+while (remainingLetters > 0 && guessNumber > 0) {
+    //show the player their progress
+    alert("Your word is " + answerArray.join(" ") + "and you have " +guessNumber+ " guesses left");
+
+    //get a guess from player
+    var guess = prompt("Guess a letter, or click cancel to stop playing.");
+    guess = guess.toLowerCase();
+    if (guess === null) {
+        //exit the loop
+        alert("Ok you can quit");
+        break;
+    } else if (guess.length !== 1) {
+        alert("Please enter a single letter.");
+    } else {
+        //update the game state with the guess
+        for (var j = 0; j < word.length; j++) {
+            console.log('one iteration');
+            if (word[j] === guess) {
+                answerArray[j] = guess;
+                remainingLetters--;
+            }
+         }
+         guessNumber--;
+    }
+} //end game loop
+
+//alert to congratulate player
 alert(answerArray.join(" "));
 alert("Good job! The answer was " + word);
-}
 	</script>
 	</body>
 </html>
