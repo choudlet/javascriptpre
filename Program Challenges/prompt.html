@@ -5,20 +5,21 @@
 </head>
 <body>
 	<h1>Hangman</h1>
+	<canvas id="canvas" width="1000" height="1000"> </canvas>
 	<script>
-	// array of words
-
+	// canvas set up
+	var canvas = document.getElementById("canvas");
+	var ctx = canvas.getContext("2d");
 	//functions
-
 	var pickWord = function() {
 		var words = [
 		"trajectory", "symphony", "desire", "antfarm", "dancer", "happiness", "positioning",
 		"hobbit", "obituary", "cheetah", "sunrise", "antithesis", "wrong", "diamonds",
 		"partnership", "oblique", "sanctuary"];
+
 		return words[Math.floor(Math.random() * words.length)];
 
 	};
-
 
 	var setupAnswerArray = function(word) {
 		var answerArray =[];
@@ -28,14 +29,13 @@
 		return answerArray;
 	};
 
-
 	var showPlayerProgress = function(answerArray) {
 		alert(answerArray.join(" "));
 	};
 
 	var getGuess = function() {
 		return prompt("Guess a letter, or click Cancel to stop playing.");
-	}
+	};
 
 	var updateGameState = function (guess, word, answerArray) {
 		var appearances = 0
@@ -45,7 +45,6 @@
 				appearances++;
 			}
 		}
-
 		return appearances;
 	};
 
@@ -54,13 +53,71 @@
 		alert("Congrats you did this correctly! The answer was " + answerArray.join(""))
 	};
 
-	//setup w. functions
+	var drawHangman = function(wrongGuesses) {
+		ctx.strokeStyle = "Purple";
+		ctx.lineWidth = 8;
 
+		if(wrongGuesses === 1) {
+			//head
+		  ctx.beginPath();
+		  ctx.arc(100, 100, 50, 0, Math.PI *2, true);
+		  ctx.stroke();
+		  ctx.beginPath();
+		  ctx.arc(120, 100, 10,0 ,Math.PI * 2,true);
+		  ctx.stroke();
+		  ctx.beginPath();
+		  ctx.arc(80, 100, 10,0 ,Math.PI * 2 ,true);
+		  ctx.stroke();
+		  ctx.strokeStyle = "Red";
+		  ctx.lineWidth = 6;
+		  ctx.beginPath();
+		  ctx.moveTo(90,125);
+		  ctx.lineTo(110,125);
+		  ctx.stroke();
+		} else if (wrongGuesses === 2) {
+			//body
+		  ctx.strokeStyle = "Purple";
+		  ctx.lineWidth = 8;
+		  ctx.beginPath();
+		  ctx.moveTo(100,150);
+		  ctx.lineTo(100,250);
+		  ctx.stroke();
+		} else if (wrongGuesses === 3) {
+			//left leg
+			ctx.beginPath();
+			ctx.moveTo(100,250);
+			ctx.lineTo(75,300);
+			ctx.stroke();
+		} else if (wrongGuesses === 4) {
+			//right leg
+			ctx.beginPath();
+			ctx.moveTo(100,250);
+			ctx.lineTo(125,300);
+			ctx.stroke();
+		} else if (wrongGuesses === 5) {
+			//left arm
+			ctx.beginPath();
+			ctx.moveTo(100,200);
+			ctx.lineTo(75,175);
+			ctx.stroke();
+		} else if (wrongGuesses === 6) {
+			//right arm
+			ctx.beginPath();
+			ctx.moveTo(100,200);
+			ctx.lineTo(125,175);
+			ctx.stroke();
+			alert("You LOSE!");
+		}
+	}
+
+	//setup w. functions
 	var word = pickWord();
 	var answerArray = setupAnswerArray(word);
 	var remainingLetters = word.length;
-	//executing the program
+	var wrongGuesses = 0;
 
+	
+	//executing the program
 	while (remainingLetters > 0) {
 		showPlayerProgress(answerArray);
 		var guess = getGuess();
@@ -71,11 +128,14 @@
 		} else {
 			var correctGuesses = updateGameState(guess, word, answerArray);
 			remainingLetters -= correctGuesses;
+			if (correctGuesses === 0) {
+				wrongGuesses++;
+				drawHangman(wrongGuesses);
+
 		}
 	}
-
+}
 	showAnswerAndCongratulatePlayer(answerArray);
-
 
 	</script>
 	</body>
