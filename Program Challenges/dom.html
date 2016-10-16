@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Playing with the DOM</title>
+</head>
+<body>
+  <h1 id="main-heading">Hello World!</h1>
+  <p>This is my paragraph</p>
+
+  <script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+
+  <script>
+  var newHeadingText = prompt("Please provide a new heading");
+  $("#main-heading").text(newHeadingText);
+  for (var i = 0; i < 3; i++) {
+    var hobby = prompt("Tell me one of your hobbies!");
+    $("body").append("<p>" + hobby + "</p>");
+  }
+  for (var i = 0; i < 5; i++) {
+    $("h1").fadeOut(3000);
+    $("h1").fadeIn(3000);
+  };
+  </script>
+</body>
+</html>
