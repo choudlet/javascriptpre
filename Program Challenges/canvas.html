@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Canvas</title>
+</head>
+
+<body>
+
+  <script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+  <canvas id="canvas" width="2000" height="2000"> </canvas>
+
+  <script>
+  var canvas = document.getElementById("canvas");
+  var ctx = canvas.getContext("2d");
+  ctx.strokeStyle = "Purple";
+  ctx.lineWidth = 8;
+  //head
+  ctx.beginPath();
+  ctx.arc(100, 100, 50, 0, Math.PI *2, true);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(120, 100, 10,0 ,Math.PI * 2,true);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(80, 100, 10,0 ,Math.PI * 2 ,true);
+  ctx.stroke();
+  ctx.strokeStyle = "Red";
+  ctx.lineWidth = 6;
+  ctx.beginPath();
+  ctx.moveTo(90,125);
+  ctx.lineTo(110,125);
+  ctx.stroke();
+  //body
+  ctx.strokeStyle = "Purple";
+  ctx.lineWidth = 8;
+  ctx.beginPath();
+  ctx.moveTo(100,150);
+  ctx.lineTo(100,250);
+  ctx.stroke();
+  //left leg
+  ctx.beginPath();
+  ctx.moveTo(100,250);
+  ctx.lineTo(75,300);
+  ctx.stroke();
+  //right leg
+  ctx.beginPath();
+  ctx.moveTo(100,250);
+  ctx.lineTo(125,300);
+  ctx.stroke();
+  //left arm
+  ctx.beginPath();
+  ctx.moveTo(100,200);
+  ctx.lineTo(75,175);
+  ctx.stroke();
+//right arm
+  ctx.beginPath();
+  ctx.moveTo(100,200);
+  ctx.lineTo(125,175);
+  ctx.stroke();
+  </script>
+</body>
+</html>
