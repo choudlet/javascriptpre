@@ -42,6 +42,7 @@
 		for (var j = 0; j <word.length; j++) {
 			if (word[j] === guess) {
 				answerArray[j] = guess;
+				drawLetter(guess, j);
 				appearances++;
 			}
 		}
@@ -110,13 +111,34 @@
 		}
 	}
 
+	//representing text etc.
+
+	// Draw the underscores for the guesses
+	var drawUnderscores = function (number) {
+		ctx.lineWidth = 4;
+		ctx.beginPath();
+
+		for (var i = 0; i < number; i++) {
+			ctx.moveTo((i * 30) + 10, 400);
+			ctx.lineTo((i * 30) + 30, 400);
+		}
+
+		ctx.stroke();
+	};
+
+//draw letters in correct place
+
+var drawLetter = function (guess, index) {
+	ctx.font = "20px Courier";
+	ctx.fillText(guess.toUpperCase(), (index * 30) + 10, 400);
+};
 	//setup w. functions
 	var word = pickWord();
 	var answerArray = setupAnswerArray(word);
 	var remainingLetters = word.length;
 	var wrongGuesses = 0;
 
-	
+	drawUnderscores(word.length);
 	//executing the program
 	while (remainingLetters > 0) {
 		showPlayerProgress(answerArray);
